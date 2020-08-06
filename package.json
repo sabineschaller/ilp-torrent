@@ -20,6 +20,9 @@
     "standard": "^14.3.4"
   },
   "dependencies": {
-    "magnet-uri": "^5.3.0"
+    "blob-to-buffer": "^1.2.8",
+    "create-torrent": "^4.4.2",
+    "magnet-uri": "^5.3.0",
+    "simple-get": "^4.0.0"
   }
 }
