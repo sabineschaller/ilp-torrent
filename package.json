@@ -25,6 +25,7 @@
     "create-torrent": "^4.4.2",
     "magnet-uri": "^5.3.0",
     "node-fetch": "^2.6.0",
-    "simple-get": "^4.0.0"
+    "simple-get": "^4.0.0",
+    "torrent-discovery": "^9.3.0"
   }
 }
