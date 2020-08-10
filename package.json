@@ -9,6 +9,7 @@
     "app:css:minify": "cleancss static/css/bundle.css -o build/bundle.min.css  && rm static/css/bundle.css",
     "app:build:css": "npm run app:css:concat && npm run app:css:minify",
     "app:build": "npm run app:build:js && npm run app:build:css && copyfiles -u 1 static/index.html build",
+    "start:app": "node index.js",
     "start:tracker": "node lib/ilp-bittorrent-tracker/bin/cmd.js",
     "start:receiver": " yarn --cwd ./node_modules/web-monetization/packages/web-monetization-demo install && yarn --cwd ./node_modules/web-monetization/packages/web-monetization-demo receiver:dev",
     "start:verifier": "REDIS_URI=mock SPSP_ENDPOINT=http://localhost:4000/spsp/~niq SPSP_PROXY_PORT=4001 VERIFIER_PORT=4002 receipt-verifier"
