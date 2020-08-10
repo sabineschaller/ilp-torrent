@@ -4,6 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "app:build:js": "browserify static/js/main.js -o build/bundle.js",
+    "app:css:concat": "cat static/css/*.css > static/css/bundle.css",
+    "app:css:minify": "cleancss static/css/bundle.css -o build/bundle.min.css  && rm static/css/bundle.css",
+    "app:build:css": "npm run app:css:concat && npm run app:css:minify",
+    "app:build": "npm run app:build:js && npm run app:build:css && copyfiles -u 1 static/index.html build",
     "start:tracker": "node lib/ilp-bittorrent-tracker/bin/cmd.js",
     "start:receiver": " yarn --cwd ./node_modules/web-monetization/packages/web-monetization-demo install && yarn --cwd ./node_modules/web-monetization/packages/web-monetization-demo receiver:dev",
     "start:verifier": "REDIS_URI=mock SPSP_ENDPOINT=http://localhost:4000/spsp/~niq SPSP_PROXY_PORT=4001 VERIFIER_PORT=4002 receipt-verifier"
@@ -19,18 +24,29 @@
   },
   "homepage": "https://github.com/sabinebertram/ilp-torrent#readme",
   "devDependencies": {
+    "browserify": "^16.5.2",
+    "clean-css-cli": "^4.3.0",
+    "concat-cli": "^4.0.0",
+    "copyfiles": "^2.3.0",
     "standard": "^14.3.4"
   },
   "dependencies": {
     "@coil/receipt-verifier": "^1.0.3",
     "bittorrent-tracker": "^9.15.0",
     "blob-to-buffer": "^1.2.8",
+    "connect": "^3.7.0",
     "create-torrent": "^4.4.2",
     "magnet-uri": "^5.3.0",
     "node-fetch": "^2.6.0",
+    "serve-static": "^1.14.1",
     "simple-get": "^4.0.0",
     "torrent-discovery": "^9.3.0",
     "web-monetization": "github:coilhq/web-monetization-projects#main",
     "webtorrent": "^0.108.6"
+  },
+  "standard": {
+    "ignore": [
+      "static"
+    ]
   }
 }
