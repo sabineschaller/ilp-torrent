@@ -54,3 +54,9 @@ Load the extension build into Chrome, then open the app on http://localhost:8080
 | Name | OPTIONAL and variable, e.g. 'vacation-2020', *Note: no extension required, will be derived from original file name* |
 
 To leech, open an incognito tab of Chrome and navigate to http://localhost:8080. Paste the magnet URI that was just generated and wait until enough funds have been streamed via web monetization and the file loads.
+
+## Immediate Todo's
+
+- [ ] allow for different asset code and asset scale
+- [ ] incremental license fee payments, not everything up front
+- [ ] additional payments to peers to incentivize seeding
