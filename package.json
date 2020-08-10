@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:tracker": "node lib/ilp-bittorrent-tracker/bin/cmd.js",
+    "start:receiver": " yarn --cwd ./node_modules/web-monetization/packages/web-monetization-demo install && yarn --cwd ./node_modules/web-monetization/packages/web-monetization-demo receiver:dev",
+    "start:verifier": "REDIS_URI=mock SPSP_ENDPOINT=http://localhost:4000/spsp/~niq SPSP_PROXY_PORT=4001 VERIFIER_PORT=4002 receipt-verifier"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,7 @@
     "standard": "^14.3.4"
   },
   "dependencies": {
+    "@coil/receipt-verifier": "^1.0.3",
     "bittorrent-tracker": "^9.15.0",
     "blob-to-buffer": "^1.2.8",
     "create-torrent": "^4.4.2",
@@ -27,6 +30,7 @@
     "node-fetch": "^2.6.0",
     "simple-get": "^4.0.0",
     "torrent-discovery": "^9.3.0",
+    "web-monetization": "github:coilhq/web-monetization-projects#main",
     "webtorrent": "^0.108.6"
   }
 }
