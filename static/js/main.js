@@ -237,7 +237,7 @@ Vue.component('fund', {
   },
   template: `
   <div>
-    <p>Loading... Waiting of sufficient funds...</p>
+    <p>Loading... Waiting for sufficient funds...</p>
   </div>
   `
 })
