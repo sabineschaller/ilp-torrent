@@ -1,5 +1,5 @@
-const WebTorrent = require('../../lib/ilp-webtorrent')
-const magnetURI = require('../../lib/ilp-magnet-uri')
+const WebTorrent = require('../../../../lib/ilp-webtorrent')
+const magnetURI = require('../../../../lib/ilp-magnet-uri')
 const fetch = require('node-fetch')
 const config = require('./config.js')
 
