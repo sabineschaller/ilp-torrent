@@ -163,10 +163,11 @@ Vue.component('leech', {
       const opts = {
         requestId: this.requestId
       }
-      client.add(this.magnet, opts, function (torrent) {
-        torrent.on('error', (error) => {
-          console.log('torrent error', error)
-        })
+      client.add(this.magnet, opts)
+      client.on('error', (error) => {
+        console.log('leech error', error)
+      })
+      client.on('torrent', (torrent) => {
         const file = torrent.files[0]
         eventBus.$emit('file')
         file.appendTo('#fileCompleted')
