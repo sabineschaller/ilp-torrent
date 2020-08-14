@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WM Torrent</title>
+    <title>ILP Torrent</title>
     <link id="favicon" rel="icon" href="https://img.icons8.com/pastel-glyph/64/000000/certificate.png" type="image/x-icon">
 
     <meta name="monetization" :content="paymentPointer">
@@ -11,8 +11,18 @@
   <body>
     <div class="container">
     
-      <h3>Web Monetization</h3>
-      <h1>Torrent</h1>
+      <h3>Web Monetization Demo</h3>
+      <h1>ILP Torrent</h1>
+
+      <div>
+        <p>
+          This page demonstrates the implementation of ILP torrent. ILP torrent is a tweaked version of 
+          <a href="https://webtorrent.io/">WebTorrent</a>, that uses a private tracker and the 
+          <a href="https://github.com/coilhq/receipt-verifier">STREAM receipt verifier</a> to check whether a 
+          license fee has been paid. The license is included in the torrent file on seeding. Hence, the 
+          payment pointer and the verifier endpoint are also part of the magnet URI. 
+        </p>
+      </div>
 
       <div id="app">
         <tabs></tabs>

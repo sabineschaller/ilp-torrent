@@ -13,50 +13,59 @@ var eventBus = new Vue()
 
 Vue.component('seed', {
   template: `
-    <form class="seed-form" @submit.prevent="onSubmit">
+    <div>
+      <p>
+        You may also seed your own file. To do so, you will have to set up your own 
+        <a href="https://github.com/coilhq/receipt-verifier">STREAM receipt verifier</a>.
+        The proxy payment pointer is the payment pointer issued by the receipt verifier.
+        Make sure to choose the currency your payment pointer is denoted in, since the 
+        tracker does not do conversion yet.
+      <p>
+      <form class="seed-form" @submit.prevent="onSubmit">
 
-      <div class="row">
-        <div class="six columns">
-          <label for="paymentPointer">Proxy Payment Pointer</label>
-          <input class="u-full-width" id="paymentPointer" v-model="paymentPointer" type="text" placeholder="$test.spsp.example.com" required>
-        </div>
-        <div class="six columns">
-          <label for="verifier">Verifier Endpoint</label>
-          <input class="u-full-width" id="verifier" v-model="verifier" type="text" placeholder="verifier.example.com" required>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="six columns">
-          <label for="amount">Price</label>
-          <input class="u-full-width" id="amount" v-model="amount" type="number" placeholder="0.00000" min="0" step="0.00001" required>
-        </div>
-        <div class="six columns">
-          <label for="asset">Currency</label>
-          <select class="u-full-width" id="asset" v-model="asset">
-            <option value="USD">USD</option>
-            <option value="EUR" disabled>EUR</option>
-            <option value="XRP" disabled>XRP</option>
-            <option value="BTC" disabled>BTC</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="six columns">
-          <label for="file">File</label>
-          <input class="u-full-width" id="file" type="file" v-on:change="selectedFile($event)" required>
-        </div>
-        <div class="six columns">
-          <label for="name">Name (optional)</label>
-          <input class="u-full-width" id="name" v-model="name" type="text" placeholder="epic-video" pattern="^[a-zA-Z0-9\-]*$">
+        <div class="row">
+          <div class="six columns">
+            <label for="paymentPointer">Proxy Payment Pointer</label>
+            <input class="u-full-width" id="paymentPointer" v-model="paymentPointer" type="text" placeholder="$test.spsp.example.com" required>
+          </div>
+          <div class="six columns">
+            <label for="verifier">Verifier Endpoint</label>
+            <input class="u-full-width" id="verifier" v-model="verifier" type="text" placeholder="verifier.example.com" required>
+          </div>
         </div>
 
-        <div>
-          <input type="submit" value="Submit">  
-        </div>    
-      </div>
-    </form>
+        <div class="row">
+          <div class="six columns">
+            <label for="amount">Price</label>
+            <input class="u-full-width" id="amount" v-model="amount" type="number" placeholder="0.00000" min="0" step="0.00001" required>
+          </div>
+          <div class="six columns">
+            <label for="asset">Currency</label>
+            <select class="u-full-width" id="asset" v-model="asset">
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="XRP">XRP</option>
+              <option value="BTC">BTC</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="six columns">
+            <label for="file">File</label>
+            <input class="u-full-width" id="file" type="file" v-on:change="selectedFile($event)" required>
+          </div>
+          <div class="six columns">
+            <label for="name">Name (optional)</label>
+            <input class="u-full-width" id="name" v-model="name" type="text" placeholder="epic-video" pattern="^[a-zA-Z0-9\-]*$">
+          </div>
+
+          <div>
+            <input type="submit" value="Submit">  
+          </div>    
+        </div>
+      </form>
+    </div>
     `,
   data () {
     return {
@@ -210,11 +219,22 @@ Vue.component('leech', {
 
 Vue.component('leechRequest', {
   template: `
-  <form class="leech-form" @submit.prevent="onSubmit">
-    <label for="magnet">Magnet URI</label>
-    <input class="u-full-width" id="magnet" v-model="magnet" type="text" placeholder="magnet:" required>
-    <input type="submit" value="Submit">  
-  </form>
+  <div>
+    <p>
+      With the Coil extension enabled, try leeching our demo file by pasting the following magnet URI:
+      <pre>
+        <code>magnet:?xt=urn:btih:db848ee06597d3bf410ce25ab7319cacd8c6c031&dn=podcast-dark-2.png&tr=ws%3A%2F%2Flocalhost%3A8000&pp=http%3A%2F%2Flocalhost%3A4001%2Fspsp%2F~niq&vr=http%3A%2F%2Flocalhost%3A4002</code>
+      </pre>
+    </p>
+    <p>
+      The file costs 0.01 USD so it will take a little bit to gather the funds before you are able to see it. 
+    </p>
+    <form class="leech-form" @submit.prevent="onSubmit">
+      <label for="magnet">Magnet URI</label>
+      <input class="u-full-width" id="magnet" v-model="magnet" type="text" placeholder="magnet:" required>
+      <input type="submit" value="Submit">  
+    </form>
+   </div>
   `,
   data () {
     return {
@@ -282,8 +302,8 @@ Vue.component('tabs', {
   `,
   data () {
     return {
-      tabs: ['Seed', 'Leech'],
-      selectedTab: 'Seed',
+      tabs: ['Leech', 'Seed'],
+      selectedTab: 'Leech',
       seedView: 'seed',
       magnet: null
     }
