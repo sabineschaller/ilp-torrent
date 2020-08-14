@@ -11,7 +11,8 @@
     "start:app": "node src/app/index.js",
     "start:tracker": "node lib/ilp-bittorrent-tracker/bin/cmd.js",
     "start:receiver": " yarn --cwd ./node_modules/web-monetization/packages/web-monetization-demo install && yarn --cwd ./node_modules/web-monetization/packages/web-monetization-demo receiver:dev",
-    "start:verifier": "REDIS_URI=mock SPSP_ENDPOINT=http://localhost:4000/spsp/~niq SPSP_PROXY_PORT=4001 VERIFIER_PORT=4002 receipt-verifier"
+    "start:verifier": "REDIS_URI=mock SPSP_ENDPOINT=http://localhost:4000/spsp/~niq SPSP_PROXY_PORT=4001 VERIFIER_PORT=4002 receipt-verifier",
+    "start:server": "node src/server/index.js" 
   },
   "repository": {
     "type": "git",
