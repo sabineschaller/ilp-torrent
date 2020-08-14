@@ -1,6 +1,9 @@
-const connect = require('connect')
-const serveStatic = require('serve-static')
+const Express = require('express')
 
-connect()
-  .use(serveStatic('build'))
-  .listen(8080, () => console.log('Server running on 8080...'))
+const app = new Express()
+
+app.use(Express.static('src/app/build'))
+
+app.listen(8080, () => {
+  console.log('Listening on port 8080...')
+})
