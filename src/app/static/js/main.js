@@ -1,7 +1,8 @@
 const WebTorrent = require('../../../../lib/ilp-webtorrent')
 const magnetURI = require('../../../../lib/ilp-magnet-uri')
 const fetch = require('node-fetch')
-const config = require('./config.js')
+
+const TRACKER = 'ENV_TRACKER'
 
 const client = new WebTorrent()
 
@@ -87,7 +88,7 @@ Vue.component('seed', {
       const info = {
         name: this.name ? `${this.name}.${this.extension}` : file.name,
         private: true,
-        announce: config.tracker,
+        announce: TRACKER,
         paymentRequired: true,
         license: {
           paymentPointer: this.paymentPointer,

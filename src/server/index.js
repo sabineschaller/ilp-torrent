@@ -1,6 +1,11 @@
 const WebTorrent = require('../../lib/ilp-webtorrent-hybrid')
 const Express = require('express')
 const fileUpload = require('express-fileupload')
+const dotenv = require('dotenv')
+
+dotenv.config()
+
+const TRACKER = process.env.TRACKER || 'ws://localhost:8000'
 
 const client = new WebTorrent()
 const app = new Express()
@@ -12,7 +17,7 @@ app.post('/seed', (req, res) => {
   const info = {
     name: req.body.name ? `${req.body.name}.${extension}` : req.files.file.name,
     private: true,
-    announce: 'ws://localhost:8000',
+    announce: TRACKER,
     paymentRequired: true,
     license: {
       paymentPointer: req.body.paymentPointer,
@@ -31,6 +36,6 @@ app.post('/seed', (req, res) => {
   })
 })
 
-app.listen(8081, () => {
-  console.log('Listening on port 8081...')
+app.listen(process.env.SERVER_PORT, () => {
+  console.log(`Listening on port ${process.env.SERVER_PORT}...`)
 })
