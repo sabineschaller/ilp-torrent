@@ -232,7 +232,7 @@ Vue.component('leechRequest', {
     </p>
     <form class="leech-form" @submit.prevent="onSubmit">
       <label for="magnet">Magnet URI</label>
-      <input class="u-full-width" id="magnet" v-model="magnet" type="text" placeholder="magnet:" required>
+      <input class="u-full-width" id="magnet" v-model.trim="magnet" type="text" placeholder="magnet:" required>
       <input type="submit" value="Submit">  
     </form>
    </div>
