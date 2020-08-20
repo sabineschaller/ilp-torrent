@@ -19,3 +19,12 @@ footer {
 .container {
   min-height: calc(100vh - 70px);
 }
+
+.warning {
+  padding-top: 25px;
+  text-align: center;
+  border: 1px solid;
+  border-color: tomato;
+  border-radius: 10px;
+  background-color: rgb(246, 205, 201);
+}

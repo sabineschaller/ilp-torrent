@@ -133,6 +133,15 @@ Vue.component('seeded', {
 Vue.component('leech', {
   template: `
   <div class="leech">
+    <div v-show="view === 'monetizationCheck'">
+      <div class="warning">
+        <p> 
+          You need to enable Web Monetization to leech a file. 
+          Check out <a href="https://webmonetization.org">webmonetization.org</a>
+          and <a href="https://coil.com">Coil</a> to learn more.
+        </p>
+      </div>
+    </div>
     <div v-show="view === 'request'">
       <leechRequest></leechRequest>
     </div>
@@ -146,7 +155,7 @@ Vue.component('leech', {
   `,
   data () {
     return {
-      view: 'request',
+      view: 'monetizationCheck',
       receipts: [],
       magnet: null,
       verifier: null,
@@ -182,9 +191,13 @@ Vue.component('leech', {
         eventBus.$emit('file')
         file.appendTo('#fileCompleted')
       })
+    },
+    checkMonetization () {
+      if (document.monetization) this.view = 'request'
     }
   },
   mounted () {
+    this.checkMonetization()
     document.monetization.addEventListener('monetizationprogress', (event) => {
       this.requestId = event.detail.requestId
       const receipt = event.detail.receipt
