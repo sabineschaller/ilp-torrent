@@ -1,0 +1,21 @@
+FROM node:12.18.3
+
+RUN mkdir /usr/src/server
+
+ARG TRACKER="ws://localhost:8001"
+ENV TRACKER=${TRACKER}
+
+ARG SECRET="supersecret"
+ENV SECRET=${SECRET}
+
+ARG PORT=80
+ENV SERVER_PORT=${PORT}
+
+COPY package*.json ./
+COPY ./lib ./lib/
+COPY ./src/server/index.js ./src/server/
+
+RUN npm install
+
+EXPOSE ${PORT}
+CMD [ "npm", "run", "start:server" ]

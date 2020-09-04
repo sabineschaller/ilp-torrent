@@ -1,0 +1,22 @@
+FROM node:12.18.3
+
+RUN mkdir /usr/src/verifier-app
+
+ARG PORT=80
+ENV VERIFIER_APP_PORT=${PORT}
+
+ARG SPSP_PROXY="http://localhost:3001"
+ENV SPSP_PROXY=${SPSP_PROXY}
+
+ARG PROXY_API="http://localhost:3002"
+ENV PROXY_API=${PROXY_API}
+
+COPY package*.json ./
+COPY ./lib ./lib/
+COPY ./src/verifier-app/index.js ./src/verifier-app/
+COPY ./src/verifier-app/build ./src/verifier-app/build/
+
+RUN npm install
+
+EXPOSE ${PORT}
+CMD [ "npm", "run", "start:verifier-app" ]
