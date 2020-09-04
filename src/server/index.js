@@ -1,16 +1,22 @@
 const WebTorrent = require('../../lib/ilp-webtorrent-hybrid')
 const Express = require('express')
 const fileUpload = require('express-fileupload')
+const basicAuth = require('express-basic-auth')
 const dotenv = require('dotenv')
 
 dotenv.config()
 
 const TRACKER = process.env.TRACKER || 'ws://localhost:8000'
+const SECRET = process.env.SERVER_SECRET || 'supersecret'
 
 const client = new WebTorrent()
 const app = new Express()
 
 app.use(fileUpload())
+
+app.use(basicAuth({
+  users: { admin: SECRET }
+}))
 
 app.post('/seed', (req, res) => {
   const extension = req.files.file.name.split('.').slice(-1)

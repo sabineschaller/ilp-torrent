@@ -46,6 +46,7 @@
     "blob-to-buffer": "^1.2.8",
     "create-torrent": "^4.4.2",
     "express": "^4.17.1",
+    "express-basic-auth": "^1.2.0",
     "express-fileupload": "^1.1.10",
     "fs-chunk-store": "^2.0.2",
     "immediate-chunk-store": "^2.1.0",
