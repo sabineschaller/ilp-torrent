@@ -2,6 +2,20 @@
 
 This repository holds a demo implementation of a private tracker that only communicates a list of peers if a license fee for the file to be torrented has been paid. It makes use of [STREAM receipt verifier](https://github.com/coilhq/receipt-verifier) for the verification of payment.
 
+## Environment Variables
+
+To be set in an .env file
+
+| Name | Example |
+| -- | -- |
+| TRACKER | ws://localhost:8000 |
+| SERVER_SECRET | supersecret |
+| SPSP_PROXY | http://localhost:3001 |
+| PROXY_API | http://localhost:3002 |
+| APP_PORT | 8080 |
+| SERVER_PORT | 8081 |
+
+
 ## Run
 ```
 $ npm install
@@ -21,7 +35,7 @@ $ npm run start:tracker
 ```
 Finally, in a fourth terminal, build and start the demo app
 ```
-$ npm run app:build && npm run start:app
+$ npm run build:app && npm run start:app
 ```
 
 To run the API and not the browser version, run
@@ -71,8 +85,7 @@ It responds with the magnet:
 magnet:?xt=urn:btih:db848ee06597d3bf410ce25ab7319cacd8c6c031&dn=file.png&tr=ws%3A%2F%2Flocalhost%3A8000&pp=http%3A%2F%2Flocalhost%3A4001%2Fspsp%2F~niq&vr=http%3A%2F%2Flocalhost%3A4002
 ```
 
-## Immediate Todo's
+## Todo's
 
-- [ ] allow for different asset code and asset scale
 - [ ] incremental license fee payments, not everything up front
 - [ ] additional payments to peers to incentivize seeding
