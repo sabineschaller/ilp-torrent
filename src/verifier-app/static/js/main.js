@@ -9,7 +9,7 @@ Vue.component('create', {
   template: `
     <div>
       <p>
-        Create a proxy payment pointer... some more explanation
+        Create a proxy payment pointer. Your payment pointer is hashed and the result is used as your proxy.
       <p>
       <form class="create-form" @submit.prevent="onSubmit">
 
@@ -67,7 +67,8 @@ Vue.component('test', {
   template: `
   <div>
       <p>
-        Test your proxy payment pointer... some more explanation
+        Test your proxy payment pointer. Paste it into the field and you will stream until 5 receipts have been received. 
+        The receipts are displayed on the bottom.
       <p>
       <form class="test-form" @submit.prevent="onSubmit">
 
@@ -148,7 +149,8 @@ Vue.component('delete', {
   template: `
   <div>
       <p>
-        Delete your proxy payment pointer... some more explanation
+        Delete your proxy payment pointer. If you don't need your proxy payment pointer anymore, you can delete it 
+        by submitting it here. After deletion, feel free to test again. You should receive an error message. 
       <p>
       <form class="delete-form" @submit.prevent="onSubmit">
 
