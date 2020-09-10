@@ -6,14 +6,20 @@ This repository holds a demo implementation of a private tracker that only commu
 
 To be set in an .env file
 
-| Name | Example |
-| -- | -- |
-| TRACKER | ws://localhost:8000 |
-| SERVER_SECRET | supersecret |
-| SPSP_PROXY | http://localhost:3001 |
-| PROXY_API | http://localhost:3002 |
-| APP_PORT | 8080 |
-| SERVER_PORT | 8081 |
+| Name | Example | Description
+| -- | -- | -- |
+APP_PORT | 8080 | port of torrent app
+SERVER_PORT | 8081 | port of torrent deamon
+VERIFIER_APP_PORT | 8082 | port of verifier service app
+VERIFIER_PORT | 4001 | port of verifier (service) balance api
+SPSP_PROXY_PORT | 4002 | port of verifier (service) spsp proxy
+PROXY_API_PORT | 4003 | port of verifier service proxy api
+TRACKER | ws://localhost:8000 | tracker endpoint
+VERIFIER | http://localhost:4001 | balances api endpoint, used by verifier service app
+SPSP_PROXY | http://localhost:4002 | spsp proxy endpoint, used by verifier service app
+PROXY_API | http://localhost:4003 | proxy api endpoint, used by verifier service app
+VERIFIER_APP | http://localhost:8082 | verifier app endpoint, used by torrent app
+SERVER_SECRET | supersecret | password to protect torrent deamon
 
 
 ## Run
@@ -29,6 +35,10 @@ In a second terminal, start the verifier
 ```
 $ npm run start:verifier
 ```
+**or** start the verifier-service
+```
+$npm run build:verifier-service && npm run start:verifier-service
+```
 In a third terminal, start the private torrent tracker
 ```
 $ npm run start:tracker
@@ -40,7 +50,11 @@ $ npm run build:app && npm run start:app
 
 To run the API and not the browser version, run
 ```
-$npm run start:server
+$ npm run start:server
+```
+To run the verifier service app, run
+```
+$ npm run build:verifier-app && npm run start:verifier-app
 ```
 
 ### Configuring Extension
@@ -76,9 +90,9 @@ To leech, open an incognito tab of Chrome and navigate to http://localhost:8080.
 
 ## Seed using the server API
 
-Make a POST request to the API
+Make a POST request to the API, making sure to provide your password
 ```
-$ curl -X POST http://localhost:8081/seed -F 'paymentPointer=http://localhost:4001/spsp/~niq' -F 'verifier=http://localhost:4002' -F 'amount=0.00002' -F 'asset=USD' -F 'file=@/path/to/your/file.png'
+$ curl -u admin:supersecret -X POST http://localhost:8081/seed -F 'paymentPointer=http://localhost:4001/spsp/~niq' -F 'verifier=http://localhost:4002' -F 'amount=0.00002' -F 'asset=USD' -F 'file=@/path/to/your/file.png'
 ```
 It responds with the magnet:
 ```
@@ -87,5 +101,7 @@ magnet:?xt=urn:btih:db848ee06597d3bf410ce25ab7319cacd8c6c031&dn=file.png&tr=ws%3
 
 ## Todo's
 
+- [ ] only include metatag with payment pointer into apps, not empty content
+- [ ] deal with asset code and asset scale conversion
 - [ ] incremental license fee payments, not everything up front
 - [ ] additional payments to peers to incentivize seeding
