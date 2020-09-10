@@ -2,6 +2,7 @@ const fetch = require('node-fetch')
 
 const SPSP_PROXY = 'ENV_SPSP_PROXY'
 const PROXY_API = 'ENV_PROXY_API'
+const VERIFIER = 'ENV_VERIFIER'
 
 var eventBus = new Vue()
 
@@ -27,6 +28,9 @@ Vue.component('create', {
       <div v-show="proxyPointer !== null">
         <p>
           Your proxy pointer is: <strong>{{ proxyPointer }}</strong>
+        </p>
+        <p>
+          The verifier endpoint is <strong>${VERIFIER}/</strong>
         </p>
       </div>
     </div>
