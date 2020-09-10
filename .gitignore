@@ -3,3 +3,6 @@ build
 dist
 .env
 .vscode
+.env.docker
+cert
+nginx.conf

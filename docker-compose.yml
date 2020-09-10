@@ -1,0 +1,88 @@
+version: '3'
+
+services:
+  nginx: 
+    image: nginx:latest
+    container_name: ilp-torrent-nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./cert:/etc/cert
+    ports:
+      - 443:443
+      - 8000:8000
+    depends_on:
+      - app
+      - server
+      - tracker
+      - verifier-app
+      - verifier-service
+    networks:
+      - interconnector
+
+  tracker:
+    build: 
+      context: .
+      dockerfile: Dockerfile-tracker
+    container_name: ilp-torrent-tracker
+    # ports:
+    #   - 8000:8000
+    networks:
+      - interconnector
+
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile-app
+    container_name: ilp-torrent-app
+    env_file:
+      - .env.docker
+    depends_on: 
+      - tracker
+    # ports: 
+    #   - 8080:8080
+    networks:
+      - interconnector
+
+  server:
+    build: 
+      context: .
+      dockerfile: Dockerfile-server
+    container_name: ilp-torrent-server
+    env_file:
+      - .env.docker
+    networks:
+      - interconnector
+
+  verifier-app:
+    build: 
+      context: .
+      dockerfile: Dockerfile-verifier-app
+    container_name: ilp-torrent-verifier-app
+    env_file:
+      - .env.docker
+    depends_on:
+      - verifier-service
+    networks:
+      - interconnector
+
+  verifier-service:
+    build: 
+      context: .
+      dockerfile: Dockerfile-verifier-service
+    container_name: ilp-torrent-verifier-service
+    env_file:
+      - .env.docker
+    depends_on:
+      - redis
+    networks:
+      - interconnector
+
+  redis:
+    image: "redis:latest"
+    container_name: ilp-torrent-redis
+    networks:
+      - interconnector
+
+networks:
+  interconnector:
+    driver: bridge

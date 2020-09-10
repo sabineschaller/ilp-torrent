@@ -1,0 +1,11 @@
+FROM node:12.18.3
+
+RUN mkdir /usr/src/verifier-service
+
+COPY package*.json ./
+COPY ./lib ./lib/
+COPY ./src/verifier-service/dist ./src/verifier-service/dist/
+
+RUN npm install
+
+CMD [ "npm", "run", "start:verifier-service" ]

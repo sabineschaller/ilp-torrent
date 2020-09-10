@@ -2,12 +2,6 @@ FROM node:12.18.3
 
 RUN mkdir /usr/src/app
 
-ARG TRACKER="ws://localhost:8001"
-ENV TRACKER=${TRACKER}
-
-ARG PORT=80
-ENV APP_PORT=${PORT}
-
 COPY package*.json ./
 COPY ./lib ./lib/
 COPY ./src/app/index.js ./src/app/
@@ -15,5 +9,4 @@ COPY ./src/app/build ./src/app/build/
 
 RUN npm install
 
-EXPOSE ${PORT}
 CMD [ "npm", "run", "start:app" ]
