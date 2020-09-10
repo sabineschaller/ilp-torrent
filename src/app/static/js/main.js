@@ -3,6 +3,7 @@ const magnetURI = require('../../../../lib/ilp-magnet-uri')
 const fetch = require('node-fetch')
 
 const TRACKER = 'ENV_TRACKER'
+const VERIFIER_APP = 'ENV_VERIFIER_SERVICE'
 
 const client = new WebTorrent()
 
@@ -16,10 +17,13 @@ Vue.component('seed', {
   template: `
     <div>
       <p>
-        You may also seed your own file. To do so, you will have to set up your own 
-        <a href="https://github.com/coilhq/receipt-verifier">STREAM receipt verifier</a>.
-        The proxy payment pointer is the payment pointer issued by the receipt verifier.
-        Make sure to choose the currency your payment pointer is denoted in, since the 
+        You may also seed your own file. To do so, you will have to create a proxy payment
+        pointer at a receipt STREAM receipt verifier. You have two options to do that:
+        <ol>
+          <li> host your own <a href="https://github.com/coilhq/receipt-verifier" target="_blank">STREAM receipt verifier</a>, or
+          <li> create a proxy at our <a href="${VERIFIER_APP}" target="_blank">STREAM receipt verifier service</a>.
+        </ol> 
+        When seeding the file, make sure to choose the currency your payment pointer is denoted in, since the 
         tracker does not do conversion yet.
       <p>
       <form class="seed-form" @submit.prevent="onSubmit">
