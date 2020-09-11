@@ -345,15 +345,24 @@ var app = new Vue({
 
 var head = new Vue({
   el: 'head',
-  data: {
-    paymentPointer: null
+  methods: {
+    addMeta(pointer) {
+      const meta = document.createElement('meta')
+      meta.name = 'monetization'
+      meta.content = pointer
+      document.getElementsByTagName('head')[0].appendChild(meta)
+    },
+    removeMeta() {
+      const meta = document.getElementsByName("monetization")[0]
+      meta.remove()
+    },
   },
   mounted () {
     eventBus.$on('decoded-license', obj => {
-      this.paymentPointer = obj.license.paymentPointer
+      this.addMeta(obj.license.paymentPointer)
     })
     eventBus.$on('file', () => {
-      this.paymentPointer = null
+      this.removeMeta()
     })
   }
 })

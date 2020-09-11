@@ -4,8 +4,6 @@ const SPSP_PROXY = 'ENV_SPSP_PROXY'
 const PROXY_API = 'ENV_PROXY_API'
 const VERIFIER = 'ENV_VERIFIER'
 
-var eventBus = new Vue()
-
 Vue.component('create', {
   template: `
     <div>
@@ -30,7 +28,7 @@ Vue.component('create', {
           Your proxy pointer is: <strong>{{ proxyPointer }}</strong>
         </p>
         <p>
-          The verifier endpoint is <strong>${VERIFIER}/</strong>
+          The verifier endpoint is: <strong>${VERIFIER}/</strong>
         </p>
       </div>
     </div>
@@ -118,7 +116,7 @@ Vue.component('test', {
   },
   methods: {
     onSubmit () {
-      eventBus.$emit('proxy-test', { proxyPointer: this.proxyPointer })
+      this.addMeta()
       if (document.monetization) {
         this.monetization = true
         document.monetization.addEventListener('monetizationstop', () => {
@@ -132,12 +130,22 @@ Vue.component('test', {
           const receipt = event.detail.receipt
           this.receipts.push(receipt)
           if (this.receipts.length > 4) {
-            eventBus.$emit('proxy-delete')
+            this.removeMeta()
           }
         })
       } else {
         this.monetization = false
       }
+    },
+    addMeta() {
+      const meta = document.createElement('meta')
+      meta.name = 'monetization'
+      meta.content = this.proxyPointer
+      document.getElementsByTagName('head')[0].appendChild(meta)
+    },
+    removeMeta() {
+      const meta = document.getElementsByName("monetization")[0]
+      meta.remove()
     },
     reset () {
       this.proxyPointer = null
@@ -245,20 +253,5 @@ var app = new Vue({
 
   },
   methods: {
-  }
-})
-
-var head = new Vue({
-  el: 'head',
-  data: {
-    paymentPointer: null
-  },
-  mounted () {
-    eventBus.$on('proxy-test', obj => {
-      this.paymentPointer = obj.proxyPointer
-    })
-    eventBus.$on('proxy-delete', () => {
-      this.paymentPointer = null
-    })
   }
 })
