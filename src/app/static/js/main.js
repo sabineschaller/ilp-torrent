@@ -24,7 +24,7 @@ Vue.component('seed', {
           <li> create a proxy at our <a href="${VERIFIER_APP}" target="_blank">STREAM receipt verifier service</a>.
         </ol> 
         When seeding the file, make sure to choose the currency your payment pointer is denoted in, since the 
-        tracker does not do conversion yet.
+        tracker does not do conversion yet. Also, we are assuming the receipts to have an asset scale of 9.
       <p>
       <form class="seed-form" @submit.prevent="onSubmit">
 
